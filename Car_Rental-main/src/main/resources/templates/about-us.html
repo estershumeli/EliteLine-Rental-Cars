@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - EliteLine Rentals</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #000;
+        }
+
+        .timeline {
+            margin: 40px 0;
+            border-left: 4px solid #0071e3;
+            padding-left: 20px;
+        }
+
+        .timeline-event {
+            margin-bottom: 20px;
+        }
+
+        .timeline-event h3 {
+            margin: 0;
+            color: #0071e3;
+        }
+
+        .timeline-event p {
+            margin: 5px 0 0 0;
+        }
+
+        .team {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            width: 250px;
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .brand-photo {
+            display: block;
+            margin: 40px auto;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .map {
+            margin: 40px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+
+        .contact {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+
+        .contact h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>About EliteLine Rentals</h1>
+    <p style="text-align: center; max-width: 700px; margin: auto;">
+        EliteLine Rentals is Albania's premium car rental brand, known for reliability, elegance, and speed.
+        We connect drivers with unforgettable road experiences.
+    </p>
+
+    <img src="/images/logoElite.jpg" alt="Brand Image" class="brand-photo">
+
+    <h2>📍 Our Journey</h2>
+    <div class="timeline">
+        <div class="timeline-event">
+            <h3>2019</h3>
+            <p>EliteLine founded with 3 luxury sedans in Tirana.</p>
+        </div>
+        <div class="timeline-event">
+            <h3>2021</h3>
+            <p>Expanded to Durrës with electric and SUV fleet.</p>
+        </div>
+        <div class="timeline-event">
+            <h3>2024</h3>
+            <p>Introduced mobile booking platform and automation.</p>
+        </div>
+        <div class="timeline-event">
+            <h3>2025</h3>
+            <p>Opening our newest location in Shkodër this summer!</p>
+        </div>
+    </div>
+
+    <h2>👨‍💼 Meet the Team</h2>
+    <div class="team">
+        <div class="team-member">
+            <img src="/images/about-us.jpg" alt="Founder">
+            <h4>Arlind H.</h4>
+            <p>Founder & CEO</p>
+        </div>
+        <div class="team-member">
+            <img src="/images/about-us.jpg" alt="Manager">
+            <h4>Enisa K.</h4>
+            <p>Operations Manager</p>
+        </div>
+        <div class="team-member">
+            <img src="/images/about-us.jpg" alt="Tech Lead">
+            <h4>Leonard D.</h4>
+            <p>Lead Developer</p>
+        </div>
+    </div>
+
+    <h2>📍 Our Newest Location</h2>
+    <div class="map">
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2967.682338683882!2d19.513081775920615!3d42.06803167121409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135276b88a0d2fdb%3A0x8af6a42e49d1aa39!2sShkod%C3%ABr%2C%20Albania!5e0!3m2!1sen!2s!4v1716942792000!5m2!1sen!2s"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <div class="contact">
+        <h3>📞 Contact Us</h3>
+        <p><strong>Phone:</strong> +355 69 770 0777</p>
+        <p><strong>Email:</strong> support@elitelinerentals.al</p>
+        <p><strong>Head Office:</strong> Bulevardi Zogu I, Tirana, Albania</p>
+        <p>Need assistance? We’re always ready to help you on the road. Reach out!</p>
+    </div>
+
+    <footer>
+        &copy; 2025 EliteLine Rentals. Powered by excellence.
+    </footer>
+</div>
+</body>
+</html>

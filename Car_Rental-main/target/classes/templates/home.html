@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteLine Rentals – Home</title>
+    <style>
+        /* --- your existing CSS --- (unchanged) */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            overflow: hidden;
+            background-color: #f2f2f2;
+        }
+
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logo img {
+            width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            flex-grow: 1;
+        }
+
+        .nav-buttons button {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-buttons .active {
+            background-color: #e6e6e6;
+            color: #0071e3;
+            box-shadow: inset 3px 0 0 #0071e3;
+        }
+
+        .logout {
+            margin-top: auto;
+        }
+
+        .logout button {
+            margin-bottom: 44px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout button:hover {
+            background-color: #990000;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: calc(100% - 300px);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(101%);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Logo -->
+    <div class="logo">
+        <img src="/images/logoElite.jpg" alt="EliteLine Logo">
+    </div>
+
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+        EliteLine welcomes you.
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+        <button th:classappend="${page == 'home'} ? 'active'" onclick="location.href='/home'">🏠 Home</button>
+
+        <!-- Admin-only -->
+        <div sec:authorize="hasRole('ADMIN')">
+            <button th:classappend="${page == 'rentals'} ? 'active'" onclick="location.href='/rentals'">🚗 Rented Car</button>
+            <button th:classappend="${page == 'bookings'} ? 'active'" onclick="location.href='/bookings'">📅 Bookings</button>
+            <button th:classappend="${page == 'management'} ? 'active'" onclick="location.href='/management'">👥 Management</button>
+        </div>
+
+        <div sec:authorize="hasRole('USER')">
+            <button th:classappend="${page == 'about'} ? 'active'"
+                    onclick="location.href='/user/about'">📖 About Us</button>
+        </div>
+
+        <!-- Available to all -->
+        <button th:classappend="${page == 'coming-soon'} ? 'active'" onclick="location.href='/coming-soon'">📊 Coming Soon</button>
+    </div>
+
+    <!-- Logout -->
+    <div class="logout">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+
+<!-- Video -->
+<div class="video-container">
+    <video autoplay loop muted playsinline>
+        <source src="/videos/car-rental1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Car</title>
+
+    <!-- ✅ Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(-45deg, #e3ffe7, #d9e7ff, #fff1eb, #f5e1ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 50%;
+            margin: 100px auto;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+        }
+
+        .blur-banner {
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            padding: 25px 40px;
+            width: fit-content;
+            margin: 0 auto 30px auto;
+            font-size: 28px;
+            font-weight: 600;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            color: #333;
+            text-align: center;
+        }
+
+        select, input {
+            width: 95%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            color: #333;
+        }
+
+        select:hover, input:hover,
+        select:focus, input:focus {
+            background: rgba(255, 255, 255, 0.7);
+            border-color: #0071e3;
+        }
+
+        button {
+            background-color: #0071e3;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.04);
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: #0071e3;
+            text-decoration: none;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .back-button svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+    </style>
+
+    <script>
+        function calculateRentalDays() {
+            let startDate = new Date(document.getElementById("startDate").value);
+            let endDate = new Date(document.getElementById("endDate").value);
+            if (startDate && endDate && endDate >= startDate) {
+                let timeDiff = endDate - startDate;
+                let days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                document.getElementById("rentalDays").value = days > 0 ? days : 1;
+            } else {
+                document.getElementById("rentalDays").value = "";
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+<a href="/home" class="back-button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"></path>
+    </svg>
+    Back to Home
+</a>
+
+<div class="container">
+    <div class="blur-banner">🚗 Book a Car</div>
+
+    <!-- Branch Filter Form -->
+    <form method="get">
+        <label>Filter by Branch:</label>
+        <select name="branch" onchange="this.form.submit()">
+            <option value="">All Branches</option>
+            <option value="Tirana" th:selected="${branch == 'Tirana'}">Tirana</option>
+            <option value="Durres" th:selected="${branch == 'Durres'}">Durres</option>
+            <option value="Gjirokaster" th:selected="${branch == 'Gjirokaster'}">Gjirokaster</option>
+        </select>
+    </form>
+
+    <!-- Booking Form -->
+    <form th:action="@{/bookings/confirm}" method="post">
+        <label>Select Car:</label>
+        <select name="carId" required>
+            <option th:each="car : ${cars}"
+                    th:value="${car.id}"
+                    th:text="${car.brand} + ' ' + ${car.model} + ' (Serial: ' + ${car.serialNumber} + ')'">
+            </option>
+        </select>
+
+        <label>Select Customer:</label>
+        <select name="customerId" required>
+            <option th:each="customer : ${customers}"
+                    th:value="${customer.id}"
+                    th:text="${customer.firstName} + ' ' + ${customer.lastName}">
+            </option>
+        </select>
+
+        <label>Pickup Branch:</label>
+        <select name="pickupBranch" required>
+            <option value="Tirana">Tirana</option>
+            <option value="Durres">Durres</option>
+            <option value="Gjirokaster">Gjirokaster</option>
+        </select>
+
+        <label>Return Branch:</label>
+        <select name="returnBranch" required>
+            <option value="Tirana">Tirana</option>
+            <option value="Durres">Durres</option>
+            <option value="Gjirokaster">Gjirokaster</option>
+        </select>
+
+        <label>Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required onchange="calculateRentalDays()">
+
+        <label>End Date:</label>
+        <input type="date" id="endDate" name="endDate" required onchange="calculateRentalDays()">
+
+        <label>Rental Days:</label>
+        <input type="text" id="rentalDays" name="rentalDays" readonly>
+
+        <button type="submit">Confirm Booking</button>
+    </form>
+</div>
+
+</body>
+</html>
+

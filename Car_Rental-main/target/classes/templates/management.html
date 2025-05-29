@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+          --light-bg: #fbeee6;
+          --dark-bg: #1e1e2f;
+          --card-bg-light: white;
+          --card-bg-dark: #2e2e3e;
+          --text-light: #333;
+          --text-dark: #f0f0f0;
+          --active-color: #0071e3;
+        }
+
+        body {
+          font-family: 'Poppins', sans-serif;
+          margin: 0;
+          display: flex;
+          background-color: var(--light-bg);
+          transition: background-color 0.3s;
+        }
+
+        body.dark {
+          background-color: var(--dark-bg);
+        }
+
+        .sidebar {
+          width: 280px;
+          height: 100vh;
+          background-color: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          padding: 20px;
+          position: fixed;
+          left: 0;
+          top: 0;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-section {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        .profile-pic {
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          background: gray;
+          margin: auto;
+        }
+
+        .username {
+          margin-top: 10px;
+          font-weight: bold;
+          color: #000;
+        }
+
+        .nav-buttons {
+          flex-grow: 1;
+        }
+
+        .nav-buttons button {
+          background: transparent;
+          border: none;
+          padding: 12px;
+          width: 100%;
+          text-align: left;
+          font-size: 16px;
+          font-weight: bold;
+          color: #333;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .nav-buttons button:hover,
+        .nav-buttons button.active {
+          background-color: rgba(0, 113, 227, 0.1);
+          color: var(--active-color);
+        }
+
+        .logout button {
+          background-color: red;
+          color: white;
+          padding: 12px;
+          width: 100%;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: bold;
+        }
+
+        .logout button:hover {
+          background-color: darkred;
+        }
+
+        .dashboard-container {
+          margin-left: 300px;
+          padding: 40px;
+          width: calc(100% - 300px);
+        }
+
+        .dashboard-title {
+          font-size: 36px;
+          text-align: center;
+          font-weight: bold;
+          margin-bottom: 20px;
+          color: var(--text-light);
+        }
+
+        .dark .dashboard-title {
+          color: var(--text-dark);
+        }
+
+        .dashboard {
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          flex-wrap: wrap;
+        }
+
+        .section {
+          width: 300px;
+          background: var(--card-bg-light);
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          transition: transform 0.3s, background-color 0.3s;
+          cursor: pointer;
+        }
+
+        body.dark .section {
+          background: var(--card-bg-dark);
+          color: var(--text-dark);
+        }
+
+        .section:hover {
+          transform: scale(1.03);
+        }
+
+        .dark-toggle {
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .dark-toggle button {
+          background-color: #0071e3;
+          color: white;
+          padding: 10px 16px;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: bold;
+        }
+
+        .dark-toggle button:hover {
+          background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="profile-section">
+        <div class="profile-pic"></div>
+        <div class="username">Admin</div>
+    </div>
+
+    <div class="dark-toggle">
+        <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+    </div>
+
+    <div class="nav-buttons">
+        <button th:classappend="${page == 'home'} ? 'active'" onclick="location.href='/home'">🏠 Home</button>
+        <button th:classappend="${page == 'rentals'} ? 'active'" onclick="location.href='/rentals'">🚗 Rented Car</button>
+        <button th:classappend="${page == 'bookings'} ? 'active'" onclick="location.href='/bookings'">📅 Bookings</button>
+        <!--
+        <button th:classappend="${page == 'revenue'} ? 'active'" onclick="location.href='/revenue'">💰 Revenue Statistics</button>
+        -->
+        <button th:classappend="${page == 'management'} ? 'active'" onclick="location.href='/management'">👥 Management</button>
+    </div>
+
+    <div class="logout">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-title">⚙ Management Dashboard</h1>
+
+    <div class="dashboard">
+        <div class="section" onclick="location.href='/cars'">
+            <h2>🚗 Car Management</h2>
+            <p>Manage cars in the system.</p>
+        </div>
+
+        <div class="section" onclick="location.href='/customers'">
+            <h2>🧑‍💼 Customer Management</h2>
+            <p>View and edit customers.</p>
+        </div>
+
+        <div class="section" onclick="location.href='/employees'">
+            <h2>👥 Employee Management</h2>
+            <p>Manage employee records.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+</script>
+
+</body>
+</html>
