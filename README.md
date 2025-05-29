@@ -1,3 +1,37 @@
+# 🚗 EliteLine Car Rental
+
+EliteLine is a full-featured **car rental management system** built with **Spring Boot**, designed to offer a stylish, dynamic, and user-friendly experience for managing rentals, customers, employees, and more.
+
+## 📌 Features
+
+- **Role-Based Access**
+  - 👤 `ADMIN`: Full control (Manage cars, customers, employees)
+  - 👥 `USER`: Limited access (e.g., view or book vehicles — future feature-ready)
+  
+- **Modern UI**
+  - Dynamic video backgrounds, blurred glass effects, responsive layout
+  - Section-based navigation for management modules
+  
+- **CRUD Operations**
+  - **Cars**: Add, edit, delete, view
+  - **Customers**: Add, edit, delete, view
+  - **Employees**: Add, edit, delete, view
+  - 💡 *Modular design allows easy extension for Bookings, Reports, etc.*
+
+- **Login & Authentication**
+  - Secure login with encrypted passwords using **BCrypt**
+  - Form-based login and logout with session invalidation
+  
+- **Database Integration**
+  - Connected to **MySQL**
+  - Tables auto-created and updated via `spring.jpa.hibernate.ddl-auto=update`
+  - `users`, `user_roles`, `cars`, `customers`, `employees` tables used
+
+- **Video-Enhanced Pages**
+  - Management dashboard with looping car showreel
+  - "Coming Soon" animated teaser for future branches (Shkodër branch launch)
+
+---
 
 ---
 
