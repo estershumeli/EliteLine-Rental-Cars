@@ -1,8 +1,8 @@
-# 🚗 EliteLine Car Rental
+# EliteLine Car Rental
 
 EliteLine is a full-featured **car rental management system** built with **Spring Boot**, designed to offer a stylish, dynamic, and user-friendly experience for managing rentals, customers, employees, and more.
 
-## 📌 Features
+## Features
 
 - **Role-Based Access**
   - 👤 `ADMIN`: Full control (Manage cars, customers, employees)
@@ -16,7 +16,7 @@ EliteLine is a full-featured **car rental management system** built with **Sprin
   - **Cars**: Add, edit, delete, view
   - **Customers**: Add, edit, delete, view
   - **Employees**: Add, edit, delete, view
-  - 💡 *Modular design allows easy extension for Bookings, Reports, etc.*
+  -  *Modular design allows easy extension for Bookings, Reports, etc.*
 
 - **Login & Authentication**
   - Secure login with encrypted passwords using **BCrypt**
@@ -35,7 +35,7 @@ EliteLine is a full-featured **car rental management system** built with **Sprin
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 - **Backend**: Spring Boot, Spring MVC, Spring Security
 - **Frontend**: HTML5, CSS3, Thymeleaf
@@ -44,7 +44,7 @@ EliteLine is a full-featured **car rental management system** built with **Sprin
 
 ---
 
-## 🔒 User Roles & Security
+## User Roles & Security
 
 The app supports multiple user roles defined in the `User` entity and stored in the `user_roles` table.
 
@@ -55,7 +55,7 @@ Security configuration is handled in `SecurityConfig.java`, with route-based acc
 
 ---
 
-## 📦 Running the Project
+## Running the Project
 
 1. **Clone the repo**  
    `git clone https://github.com/yourusername/EliteLine-Car-rental.git`
@@ -80,15 +80,6 @@ Security configuration is handled in `SecurityConfig.java`, with route-based acc
      `username: user`  
      `password: user123`
 
----
-
-## 🛠️ Future Enhancements
-
-- 💳 Booking system with payment integration
-- 📊 Revenue analytics dashboard
-- 🌐 Multiple branch filtering
-- 📅 Reservation calendar with availability tracking
-- 🧑‍💻 Admin/User dashboards with dynamic role control
 
 ---
 
