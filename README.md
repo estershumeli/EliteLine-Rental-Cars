@@ -98,9 +98,7 @@ Security configuration is handled in `SecurityConfig.java`, with route-based acc
 ![image](https://github.com/user-attachments/assets/9bbff748-b87b-4441-8b1d-80b551b80400)
 ![image](https://github.com/user-attachments/assets/918fcac8-84b4-41e9-8bda-4a301d7cc6b3)
 ![image](https://github.com/user-attachments/assets/af82f5dd-fb45-488d-aef3-e27de450a53b)
-![image](https://github.com/user-attachments/assets/9954956f-e690-44de-aa92-1c692c9da071)
-![image](https://github.com/user-attachments/assets/15fd9809-b9b8-4e58-ab66-729a46e8af8f)
-![image](https://github.com/user-attachments/assets/5bc2aade-721b-48cd-bce2-ddb44dc33510)
+
 
 
 ---
